@@ -17,8 +17,7 @@ opt <- parser$parse_args()
 
 # Check if mandatory argument are provided
 if (is.null(opt$distances)) {
-  opt$distances <- 'distances.csv'
-  # stop("Error: Mandatory argument --distances is required.")
+  stop("Error: Mandatory argument --distances is required.")
 }
 
 # Read the distance matrix
@@ -43,7 +42,7 @@ clusters <- cutree(hc, k = opt$clusters)
 clusters_df <- data.frame(id = distances_df$id, label = clusters)
 
 # Write clusters to disk
-write_csv(clusters_df, file.path(opt$output_dir, paste0(opt$name, ".ward.csv")), na = "")
+write_csv(clusters_df, file.path(opt$output_dir, paste0(opt$name, ".clusters.csv")), na = "")
 
 # Print success message
-cat("Clustering complete. Results saved to:", file.path(opt$output_dir, paste0(opt$name, ".ward.csv")), "\n")
+cat("Clustering complete. Results saved to:", file.path(opt$output_dir, paste0(opt$name, ".clusters.csv")), "\n")
